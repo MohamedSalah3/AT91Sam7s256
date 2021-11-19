@@ -8,8 +8,6 @@
 #include <board/Button-lib.h>
 
 
-#define SIZE 4
-
 /// Push button #0 definition.
 #define SWITCH_BUTTON_4_8    {AT91C_PIO_PA26, AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_INPUT, PIO_DEGLITCH | PIO_PULLUP}
 /// Push button #1 definition.
@@ -31,10 +29,20 @@
 /// Push button #4 index.
 #define PUSHBUTTON_1_5   3
 
+/**
+ * @brief 
+ * 
+ * @return unsigned char 
+ */
 
 unsigned char Button_init(unsigned int Swtich);
+/**
+ * @brief 
+ * 
+ * @return unsigned char 
+ */
 
-unsigned char Button_all_init(unsigned int size);
+unsigned char Button_all_init(void);
 
 
 

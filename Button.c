@@ -27,6 +27,7 @@ return( PIO_Configure(&pins_switches[Swtich],1));
  * @param size number of pushbutons (4)
  * @return unsigned char 
  */
-unsigned char Button_all_init(unsigned int size){
-return PIO_Configure(pins_switches,size);
+unsigned char Button_all_init(void){
+    
+return PIO_Configure(pins_switches,numswitches);
 }

@@ -1,18 +1,19 @@
 #include "LED.h"
+//------------------------------------------------------------------------------
+//         Internal variables
+//------------------------------------------------------------------------------
 
-#define SIZE 2
-
-       static const Pin at91board_led[] = 
-       { /*Led Configurations */
-            {AT91C_BASE_PIOA, LED_CLOCK_LINE, PIO_OUTPUT_1, PIO_DEFAULT},
-            {AT91C_BASE_PIOA, LED_DATA_LINE, PIO_OUTPUT_1, PIO_DEFAULT}
-       };
+#ifdef LED_PINS
+static const Pin Leds[] = {LED_PINS};
+static const unsigned int numLeds = PIO_LISTSIZE(Leds);
+#endif
 
 void Led_Init(void)
 {
 /*Configure leds as output */  
-unsigned char Error_status = PIO_Configure(at91board_led,SIZE);
-clear_leds(); 
+unsigned char Error_status = PIO_Configure(Leds,numLeds);
+data_clock_clear_set(DATA_LINE_CLEAR);
+data_clock_clear_set(CLOCK_LINE_CLEAR);
 
 }
 
@@ -28,10 +29,28 @@ void led_flash()
 
 
 
-static void clear_leds(void)
-{	/*
-	 * Clear all the LEDs
-	 */
-	AT91C_BASE_PIOA->PIO_CODR = LED_CLOCK_LINE;
-	AT91C_BASE_PIOA->PIO_SODR = LED_DATA_LINE;    
+void data_clock_clear_set( unsigned char command )
+{
+switch (command)
+{
+case DATA_LINE_CLEAR:
+    /* code */
+     PIO_Clear(&Leds[LED_INDEX_DATA]);
+    break;
+case DATA_LINE_SET:
+    PIO_Set(&Leds[LED_INDEX_DATA]);
+    /* code */
+    break;
+case CLOCK_LINE_CLEAR:
+    /* code */
+        PIO_Clear(&Leds[LED_INDEX_CLOCK]);
+    break;
+case CLOCK_LINE_SET:
+    /* code */
+        PIO_Set(&Leds[LED_INDEX_CLOCK]);
+    break;
 }
+
+}
+
+

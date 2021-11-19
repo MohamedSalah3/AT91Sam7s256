@@ -12,8 +12,8 @@
 int main()
 {
 	Led_Init();
-	unsigned char error_status = Button_all_init(4);
-	
+	unsigned char error_status = Button_all_init();
+
 	OLED_Init();
 while(1)
 {
