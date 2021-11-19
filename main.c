@@ -15,12 +15,11 @@ int main()
 	unsigned char error_status = Button_all_init();
 
 	OLED_Init();
-while(1)
-{
+
+	while(1)	
+	{
 	led_flash();
-
-
-}
+	}
 	return 0;
 }
 

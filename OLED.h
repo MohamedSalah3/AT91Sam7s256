@@ -5,7 +5,7 @@
 
 
 
-void OLED_Init(void);
+unsigned char OLED_Init(void);
 
 
 
