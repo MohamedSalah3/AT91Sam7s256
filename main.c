@@ -30,7 +30,9 @@ int main()
 	short LeftRight;
 	Led_Init();
 	/*Timer Intialization */
-	Timer_Init(&PIT_Configuration0);
+	uint32_t clock_count = 2000;
+	unsigned char error = Timer_Init(&PIT_Configuration0);
+	error =Timer_Start(PIT_TIMER,&clock_count);
 	
 	
 	OLED_Init();

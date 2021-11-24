@@ -93,7 +93,6 @@ case PIT_TIMER:
      PIT_SetPIV(Timer_Count);
 
     break;
-
 default:
 ret_error =  E_NOK;
     break;

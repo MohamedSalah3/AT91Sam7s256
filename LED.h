@@ -33,7 +33,7 @@ void Led_Init(void);
 void led_flash(void);
 
 
-
+void data_clock_clear_set( unsigned char command );
 
 
 
