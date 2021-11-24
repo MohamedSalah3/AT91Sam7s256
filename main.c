@@ -9,6 +9,7 @@
 #include "OLED.h"
 #include "Button.h"
 #include "delay.h"
+#include "PIT.h"
 /*
  * Define the direction codes for the movement of the LEDs.
  */
@@ -28,8 +29,13 @@ int main()
 
 	short LeftRight;
 	Led_Init();
+	/*Timer Intialization */
+	Timer_Init(&PIT_Configuration0);
+	
+	
+	OLED_Init();
 	unsigned char error_status = Button_all_init();
-
+	
 	/*
 	 * First set the LED position variable to the first LED.
 	 */
