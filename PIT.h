@@ -2,6 +2,7 @@
 #define _PIT_H_
 #include "std_types.h"
 #include "../at91lib/include/atmel/pit.h"
+#include "../at91lib/include/atmel/aic.h"
 #include "../at91lib/include/boards/at91sam7s-ek/at91sam7s256/AT91SAM7S256.h"
 
 /************************************************************************/

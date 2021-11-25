@@ -102,13 +102,15 @@ int main()
 
 #endif
 
-uint32_t Time_start,Time_end =  0 ;
-
-uint32_t State_Machine = 0;
+uint32_t Time,Time_start,Time_end =  0 ,STatus = 0, State_Machine = 0;
 
 #define NONE     0
 #define START_COUNTING_TIME  2
 #define STOP_COUNTING_TIME   3
+
+
+#define OVF_HAPPENED    1
+#define OVF_DID_NOT     0
 
 int main()
 {
@@ -134,16 +136,29 @@ int main()
 	    Timer_Init(&PIT_Configuration0);
 		Timer_Start(&PIT_Configuration0);
 
-		led_flash();
+	
 
 	while(1)	
 	{
+
+			led_ALL_flash();
 		if(IsButtonPressed(BUTTON1))
 			{	
-			if((State_Machine==NONE) || (State_Machine ==STOP_COUNTING_TIME ))
-				{State_Machine = START_COUNTING_TIME;}
+		    	if((State_Machine==NONE) || (State_Machine ==STOP_COUNTING_TIME ))
+				{
+					State_Machine = START_COUNTING_TIME;
+				}
 				if(State_Machine==START_COUNTING_TIME)
-				{State_Machine = STOP_COUNTING_TIME;}
+				{
+					State_Machine = STOP_COUNTING_TIME;
+				}
+
+				/*Dispalay is zeroed here*/
+					 ClearOLEDdisplay();
+					 	printf("%c", '0');
+
+					
+					
 
 			}
 			if(State_Machine == START_COUNTING_TIME)
@@ -153,16 +168,24 @@ int main()
 				Timer_GetValue(PIT_TIMER,&Time_start);
 				
 			
-			led_flash();
+		     	led_ONE_flash(LED1);
 			}
 			if(State_Machine == STOP_COUNTING_TIME)
 			{
 				Timer_GetValue(PIT_TIMER,&Time_end);	
+				Timer_GetStatus(PIT_TIMER,&STatus);
 				/* STOP_COUNTING_TIME */
 				Timer_Stop(PIT_TIMER);
 				/*Display the time */
-				//printf("%ld\n", Time_end-Time_start);
-			
+				if(STatus == OVF_HAPPENED){
+                Time = (Time_end + (2^20)) -Time_start ;
+				}else{
+
+					Time=Time_end-Time_start;
+
+				}
+				printf("%ld\n", Time);
+			  
 			}	
 
 

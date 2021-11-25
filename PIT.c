@@ -50,6 +50,8 @@ Usage
     case PIT_INTERRUPT_MODE:
     
             PIT_Init(Timer_cfg->period,Timer_cfg->pit_frequency);
+            AIC_ConfigureIT(AT91C_ALL_INT, 0, pit_hook);
+            AIC_EnableIT(AT91C_ALL_INT);
             PIT_EnableIT();
         break;
     case PIT_POLLING_MODE:

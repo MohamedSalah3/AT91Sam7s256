@@ -30,8 +30,8 @@
 void Led_Init(void);
 
 
-void led_flash(void);
-
+void led_ALL_flash();
+void led_ONE_flash(unsigned char led_num);
 
 void data_clock_clear_set( unsigned char command );
 

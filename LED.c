@@ -18,15 +18,25 @@ data_clock_clear_set(CLOCK_LINE_CLEAR);
 }
 
 
-void led_flash()
+void led_ALL_flash()
 {
 	//SetLEDcolor(LED1,RED);
     SetAllLEDs(LEDsAllRed);
     delay_ms(100);
-	SetAllLEDs(LEDsAllRed);
+	SetAllLEDs(LEDsAllOff);
 	delay_ms(100);
 
 }
+
+void led_ONE_flash(unsigned char led_num)
+{
+	SetLEDcolor(led_num,RED);
+    delay_ms(100);
+	SetLEDcolor(led_num,OFF);
+	delay_ms(100);
+
+}
+
 
 
 
