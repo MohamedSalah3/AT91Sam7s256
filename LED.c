@@ -37,8 +37,22 @@ void led_ONE_flash(unsigned char led_num)
 
 }
 
+void small_fun(void)
+{static int i=0;
+    for(i=0 ;i<8 ; i++){
+        SetLEDcolor(i,OFF);
+        delay_ms(1000);
+    }
 
+}
 
+void turn_0ff_rate_1Sec(void)
+{
+SetAllLEDs(LEDsAllRed);
+delay_ms(1000);
+small_fun();
+SetLEDcolor(LED4,GREEN);
+}
 
 void data_clock_clear_set( unsigned char command )
 {

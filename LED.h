@@ -36,5 +36,7 @@ void led_ONE_flash(unsigned char led_num);
 void data_clock_clear_set( unsigned char command );
 
 
+void small_fun(void);
+void turn_0ff_rate_1Sec(void);
 
 #endif

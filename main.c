@@ -114,6 +114,8 @@ uint32_t Time,Time_start,Time_end =  0 ,STatus = 0, State_Machine = 0;
 
 int main()
 {
+
+	uint32_t elapsed_time = 0;
 	 Led_Init();
 	
 	 Button_all_init();
@@ -130,13 +132,8 @@ int main()
 	 * These are pointer variables, so we need to display their address
 	 * rather than the contents of the location.
 	 */
-
-		
-
 	    Timer_Init(&PIT_Configuration0);
 		Timer_Start(&PIT_Configuration0);
-
-	
 
 	while(1)	
 	{
@@ -157,10 +154,19 @@ int main()
 					 ClearOLEDdisplay();
 					 	printf("%c", '0');
 
-					
+					/*When Button 1 is pressed, the display is zeroed; all the LEDs are turned RED 
+							and begin to count down (turn off) at the rate of one per second. The countdown 
+								can be from left to right or right to left.
+
+						*/
+					turn_0ff_rate_1Sec();
+				
+
 					
 
 			}
+				Timer_GetValue(PIT_TIMER,&elapsed_time);
+					printf("Elapsed Time %ld",elapsed_time);
 			if(State_Machine == START_COUNTING_TIME)
 			{
 				
@@ -184,7 +190,7 @@ int main()
 					Time=Time_end-Time_start;
 
 				}
-				printf("%ld\n", Time);
+				printf("Reaction Time %ld\n", Time);
 			  
 			}	
 
