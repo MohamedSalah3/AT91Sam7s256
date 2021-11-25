@@ -83,24 +83,19 @@ void pit_hook(void)
  * Description: This function strats the needed timer.
  *
  */
-ERROR_STATUS Timer_Start(uint8_t Timer_CH_NO, uint32_t Timer_Count){
+ERROR_STATUS Timer_Start(Timer_cfg_s* Timer_cfg)
+{
 ERROR_STATUS ret_error = E_OK;
-
-switch (Timer_CH_NO)
+switch (Timer_cfg ->Timer_CH_NO)
 {
 case PIT_TIMER:
      PIT_Enable();
-     PIT_SetPIV(Timer_Count);
-
+     PIT_SetPIV(Timer_cfg->period);
     break;
 default:
 ret_error =  E_NOK;
     break;
 }
-
-
-
-
 return ret_error;
 }
 

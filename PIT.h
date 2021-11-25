@@ -65,16 +65,14 @@ void pit_hook(void);
 ERROR_STATUS Timer_Init(Timer_cfg_s* Timer_cfg);
 
 /**
- * Input:
- * 	Timer_CH_NO: The channel number of the timer needed to be started.
- *	Timer_Count: The start value of the timer.
+ * Input:Timer_cfg_s* Timer_cfg
  * Output:
  * In/Out:
  * Return: The error status of the function.
  * Description: This function strats the needed timer.
  *
  */
-ERROR_STATUS Timer_Start(uint8_t Timer_CH_NO, uint32_t Timer_Count);
+ERROR_STATUS Timer_Start(Timer_cfg_s* Timer_cfg);
 
 /**
  * Input:

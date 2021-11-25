@@ -20,9 +20,10 @@ data_clock_clear_set(CLOCK_LINE_CLEAR);
 
 void led_flash()
 {
-	SetLEDcolor(LED1,RED);
-	delay_ms(100);
-	SetLEDcolor(LED1,OFF);
+	//SetLEDcolor(LED1,RED);
+    SetAllLEDs(LEDsAllRed);
+    delay_ms(100);
+	SetAllLEDs(LEDsAllRed);
 	delay_ms(100);
 
 }

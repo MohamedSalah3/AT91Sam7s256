@@ -49,7 +49,7 @@ SPI_PCS(2)|SPI_SCBR(500000, BOARD_MCK)|SPI_DLYBS(3, BOARD_MCK)| SPI_DLYBCT(4, BO
 
 SPI_ConfigureNPCS(&spi,2,SPI_SCBR(500000, BOARD_MCK));
 /*Enable SPI*/
-SPI_Enable(&spi);
+OLED_Enable();
 return Error_status;
 }
 

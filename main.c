@@ -19,7 +19,7 @@
 /*
  * Main function - Program execution begins here!
  */
-
+#if 0
 int main()
 {
 	/*
@@ -100,20 +100,74 @@ int main()
 	return 0;
 }
 
+#endif
 
-/*
+uint32_t Time_start,Time_end =  0 ;
+
+uint32_t State_Machine = 0;
+
+#define NONE     0
+#define START_COUNTING_TIME  2
+#define STOP_COUNTING_TIME   3
+
 int main()
 {
-	Led_Init();
-	unsigned char error_status = Button_all_init();
+	 Led_Init();
+	
+	 Button_all_init();
 
-	OLED_Init();
+	 OLED_Init();
+	 
+	 ConfigureOLEDdisplay();
+	 SetOLEDdisplayMode(TextDisplay);
+	 ClearOLEDdisplay();
+
+	 /*
+	 * Display the values of the global loader variables
+	 *
+	 * These are pointer variables, so we need to display their address
+	 * rather than the contents of the location.
+	 */
+
+		
+
+	    Timer_Init(&PIT_Configuration0);
+		Timer_Start(&PIT_Configuration0);
+
+		led_flash();
 
 	while(1)	
 	{
-	led_flash();
+		if(IsButtonPressed(BUTTON1))
+			{	
+			if((State_Machine==NONE) || (State_Machine ==STOP_COUNTING_TIME ))
+				{State_Machine = START_COUNTING_TIME;}
+				if(State_Machine==START_COUNTING_TIME)
+				{State_Machine = STOP_COUNTING_TIME;}
+
+			}
+			if(State_Machine == START_COUNTING_TIME)
+			{
+				
+				/*Start counting time */
+				Timer_GetValue(PIT_TIMER,&Time_start);
+				
+			
+			led_flash();
+			}
+			if(State_Machine == STOP_COUNTING_TIME)
+			{
+				Timer_GetValue(PIT_TIMER,&Time_end);	
+				/* STOP_COUNTING_TIME */
+				Timer_Stop(PIT_TIMER);
+				/*Display the time */
+				//printf("%ld\n", Time_end-Time_start);
+			
+			}	
+
+
 	}
 	return 0;
 }
 
-*/
+
